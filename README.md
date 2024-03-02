@@ -8,7 +8,9 @@
 - Ports: Detachable VGA port
 - Integrated NIC: 1Gigabit
 - Additional NIC: M.2 E A Key 2.5 Gigabit RJ45 LAN Realtek RTL8125B
-![hp t630 from ebay for $14.99](hp-t630.png)
+
+
+  ![hp t630 from ebay for $14.99](hp-t630.png)
   Learn more about T630 from [Parky Towers](https://www.parkytowers.me.uk/thin/hp/t630/)
 
 ## Reasons for Choosing HP T630:
@@ -29,8 +31,10 @@
 5. Opting for a 2.5 Gigabit NIC proved optimal for my home network, aligning with plans to utilize a managed 2.5Gb switch for network segmentation between home, guest, and IoT devices.
 
 
-## NIC Installation:
 ![RTL8125b 2.5gb NIC](rtl8125b.jpeg)
+
+
+## NIC Installation:
 
 1. Removed the detachable VGA port from the thin client and replaced with the NIC.
 3. Utilized integrated 1Gigabit ethernet port for WAN and 2.5G port for LAN.
