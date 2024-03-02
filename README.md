@@ -10,7 +10,7 @@
 - Additional NIC: M.2 E A Key 2.5 Gigabit RJ45 LAN Realtek RTL8125B
 
 
-  ![hp t630 from ebay for $14.99](hp-t630.png)
+  ![hp t630 from ebay for $14.99](img/hp-t630.png)
   Learn more about T630 from [Parky Towers](https://www.parkytowers.me.uk/thin/hp/t630/)
 
 ## Reasons for Choosing HP T630:
@@ -31,7 +31,7 @@
 5. Opting for a 2.5 Gigabit NIC proved optimal for my home network, aligning with plans to utilize a managed 2.5Gb switch for network segmentation between home, guest, and IoT devices.
 
 
-![RTL8125b 2.5gb NIC](rtl8125b.jpeg)
+![RTL8125b 2.5gb NIC](img/rtl8125b.jpeg)
 
 
 ## NIC Installation:
@@ -40,7 +40,7 @@
 3. Utilized integrated 1Gigabit ethernet port for WAN and 2.5G port for LAN.
 
 ## pfSense Installation:
-![pfSense Console](pfsense-console.png)
+![pfSense Console](img/pfsense-console.png)
 
 1. Imaged [pfSense](https://www.pfsense.org/download/) on a flash drive with [Etcher](https://etcher.balena.io/).
 2. Realtek RTL8125 NIC not detected initially.
