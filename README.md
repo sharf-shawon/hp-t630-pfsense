@@ -9,6 +9,8 @@
 - Integrated NIC: 1Gigabit
 - Additional NIC: M.2 E A Key 2.5 Gigabit RJ45 LAN Realtek RTL8125
 
+  Learn more about T630 from [Parky Towers](https://www.parkytowers.me.uk/thin/hp/t630/)
+
 ## Reasons for Choosing HP T630:
 
 1. Cost-effective: Purchased brand new for $15 on eBay.
@@ -20,7 +22,7 @@
 
 ## NIC Installation:
 
-1. Purchased M.2 E A Key 2.5 Gigabit RJ45 LAN Realtek RTL8125 NIC from AliExpress for ~$7.
+1. [Researched](https://www.miccet.nl/2023/01/11/extra-nic-on-the-hp-thin-client-t630/) and purchased M.2 E A Key 2.5 Gigabit RJ45 LAN Realtek RTL8125 NIC from AliExpress for ~$7.
 2. Installed NIC in the HP T630 thin client.
 3. Utilized integrated 1Gigabit ethernet port for WAN and 2.5G port for LAN.
 
