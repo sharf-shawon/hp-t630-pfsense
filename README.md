@@ -1,7 +1,26 @@
 # Building a Perfect pfSense Router under $25 with HP T630 Thin Client + 2.5Gb Intel NIC
 
+![HP T630 Thin Client](img/t630.jpg)
+
 This guide details how to build a cost-effective, energy-efficient pfSense router/firewall using an HP T630 Thin Client. The total build cost is under $25, making it an excellent option for home networking enthusiasts.
-> For a better experience, follow [this guide on my website](https://shawon.me/posts/pfsence-router-under-25-hp-t630-thin-client/).
+> *For a better experience, follow [this guide on my website](https://shawon.me/posts/pfsence-router-under-25-hp-t630-thin-client/).*
+
+## Why This Build?
+
+### Advantages
+- **Cost-Effective**: Complete build under $25
+- **Energy Efficient**: Low power consumption (12-28W)
+- **Silent Operation**: Fanless design
+- **Performance**: AES-NI support for VPN capabilities
+- **Expandability**: 2.5GB LAN for future-proofing
+- **Compact**: Small form factor
+
+### Use Cases
+- Home network routing
+- Network segmentation (Home/Guest/IoT)
+- Basic firewall implementation
+- VPN server capabilities
+
 
 ## Hardware Requirements
 
@@ -68,22 +87,6 @@ This guide details how to build a cost-effective, energy-efficient pfSense route
    ```
    - Reboot system
    - Assign interfaces (Option 1 in console menu)
-
-## Why This Build?
-
-### Advantages
-- **Cost-Effective**: Complete build under $25
-- **Energy Efficient**: Low power consumption (12-28W)
-- **Silent Operation**: Fanless design
-- **Performance**: AES-NI support for VPN capabilities
-- **Expandability**: 2.5GB LAN for future-proofing
-- **Compact**: Small form factor
-
-### Use Cases
-- Home network routing
-- Network segmentation (Home/Guest/IoT)
-- Basic firewall implementation
-- VPN server capabilities
 
 ## Performance Considerations
 
