@@ -1,64 +1,105 @@
-# pfSense router/firewall on HP T630 Thin Client under $25
+# Building a Perfect pfSense Router under $25 with HP T630 Thin Client + 2.5Gb Intel NIC
 
-## HP T630 Thin Client (relevant) Specs:
+This guide details how to build a cost-effective, energy-efficient pfSense router/firewall using an HP T630 Thin Client. The total build cost is under $25, making it an excellent option for home networking enthusiasts.
+> For a better experience, follow [this guide on my website](https://shawon.me/posts/pfsence-router-under-25-hp-t630-thin-client/).
 
-- CPU: AMD GX-420GI
-- Power Consumption: 12W idle, 28W running
-- Cooling: 100% passive
-- Ports: Detachable VGA port
-- Integrated NIC: 1Gigabit
-- Additional NIC: M.2 E A Key 2.5 Gigabit RJ45 LAN Realtek RTL8125B
+## Hardware Requirements
 
+### Base System: HP T630 Thin Client
+- **CPU**: AMD GX-420GI (with AES-NI support)
+- **Power Consumption**: 12W idle, 28W under load
+- **Cooling**: Passive (fanless)
+- **Integrated NIC**: 1 Gigabit Ethernet
+- **Expansion**: M.2 E A Key slot
+- **Cost**: ~$15 (eBay, brand new)
 
-  ![hp t630 from ebay for $14.99](img/hp-t630.png)
-  Learn more about T630 from [Parky Towers](https://www.parkytowers.me.uk/thin/hp/t630/)
+![HP T630 Thin Client](img/hp-t630.png)
 
-## Reasons for Choosing HP T630:
+*For detailed specifications, visit [Parky Towers T630 Documentation](https://www.parkytowers.me.uk/thin/hp/t630/)*
 
-1. Cost-effective: Purchased brand new for $14.99 on eBay.
-2. Compact size and low power consumption.
-3. CPU supports AES-NI, ideal for pfSense.
-4. 100% Passive cooling for silent operation.
-5. Compatible with additional NIC for LAN connectivity.
-6. Suitable for my home network with a 1Gig internet connection.
+### Additional Network Interface
+- **Model**: Realtek RTL8125B
+- **Speed**: 2.5 Gigabit Ethernet
+- **Form Factor**: M.2 2230 (E A Key)
+- **Cost**: ~$7-9 ([AliExpress Link](https://www.aliexpress.us/item/3256804497025928.html))
 
-## NIC Selection:
+![RTL8125b 2.5GB NIC](img/rtl8125b.jpeg)
 
-1. Since the T630 is a thin client, it has limitations on compatible NICs.
-2. With no PCIe slot available and a preference for a clean setup without exposed wires.
-3. The T630's M.2 2230 slot, typically used for WiFi cards, became the focus.
-4. After thorough online research, [confirmaed](https://www.miccet.nl/2023/01/11/extra-nic-on-the-hp-thin-client-t630/) that the Realtek RTL8125B is compatible with the T630, available on [AliExpress for $7](https://www.aliexpress.us/item/3256804497025928.html?spm=a2g0o.productlist.main.7.14f3771duP72l5&algo_pvid=5c2b2fb4-89b8-446c-ac7c-028492c93b60&algo_exp_id=5c2b2fb4-89b8-446c-ac7c-028492c93b60-3&pdp_npi=4%40dis%21USD%2117.53%218.59%21%21%2117.53%218.59%21%402101fb1217094094512428069e3e7d%2112000030087812585%21sea%21US%210%21AB&curPageLogUid=9Qk1qn1VsapJ&utparam-url=scene%3Asearch%7Cquery_from%3A).
-5. Opting for a 2.5 Gigabit NIC proved optimal for my home network, aligning with plans to utilize a managed 2.5Gb switch for network segmentation between home, guest, and IoT devices.
+## Hardware Assembly
 
+1. **NIC Installation**
+   - Remove the detachable VGA port from the thin client
+   - Install the M.2 NIC in the vacated slot
+   - No additional modifications required
 
-![RTL8125b 2.5gb NIC](img/rtl8125b.jpeg)
+2. **Network Configuration**
+   - Integrated 1GB NIC → WAN connection
+   - RTL8125B 2.5GB NIC → LAN connection
 
+## Software Installation
 
-## NIC Installation:
+### Prerequisites
+- [pfSense ISO](https://www.pfsense.org/download/)
+- [Etcher](https://etcher.balena.io/) or similar USB writing tool
+- USB drive (minimum 8GB)
 
-1. Removed the detachable VGA port from the thin client and replaced with the NIC.
-3. Utilized integrated 1Gigabit ethernet port for WAN and 2.5G port for LAN.
+### Installation Steps
 
-## pfSense Installation:
+1. **Create Installation Media**
+   - Download pfSense installation image
+   - Write image to USB drive using Etcher
+   - Boot T630 from USB drive
+
+2. **Initial Setup**
+   - Complete basic pfSense installation
+   - Note: RTL8125B NIC won't be detected initially
+   - Configure WAN interface using integrated NIC
+
+3. **RTL8125B Driver Installation**
+   - Access pfSense console (Option 8 for shell)
+   - Install Realtek driver:
+   ```bash
+   pkg add net/realtek-re-kmod
+   ```
+   - Configure driver autoload by adding to `/boot/loader.conf`:
+   ```bash
+   if_re_load="YES"
+   if_re_name="/boot/modules/if_re.ko"
+   ```
+   - Reboot system
+   - Assign interfaces (Option 1 in console menu)
+
+## Why This Build?
+
+### Advantages
+- **Cost-Effective**: Complete build under $25
+- **Energy Efficient**: Low power consumption (12-28W)
+- **Silent Operation**: Fanless design
+- **Performance**: AES-NI support for VPN capabilities
+- **Expandability**: 2.5GB LAN for future-proofing
+- **Compact**: Small form factor
+
+### Use Cases
+- Home network routing
+- Network segmentation (Home/Guest/IoT)
+- Basic firewall implementation
+- VPN server capabilities
+
+## Performance Considerations
+
+This build is suitable for:
+- Internet connections up to 1Gbps
+- Multiple VLANs
+- Basic to moderate VPN usage
+- Small to medium home networks
+
 ![pfSense Console](img/pfsense-console.png)
 
-1. Imaged [pfSense](https://www.pfsense.org/download/) on a flash drive with [Etcher](https://etcher.balena.io/).
-2. Realtek RTL8125 NIC not detected initially.
-3. Completed initial setup with one 1Gigabit NIC for WAN.
-4. Accessed pfSense console menu and entered shell (option 8).
-5. Installed Realtek driver using the following command:
+## Additional Resources
+- [pfSense Documentation](https://docs.netgate.com/pfsense/en/latest/)
+- [HP T630 Technical Details](https://www.parkytowers.me.uk/thin/hp/t630/)
+- [RTL8125B Compatibility Reference](https://www.miccet.nl/2023/01/11/extra-nic-on-the-hp-thin-client-t630/)
 
-```
-pkg add net/realtek-re-kmod
+## Conclusion
 
-```
-6. Modified `/boot/loader.conf` file to load Realtek driver on boot:
-```
-if_re_load="YES"
-if_re_name="/boot/modules/if_re.ko"
-```
-7. Rebooted the machine and assigned interfaces again from the console menu (option 1).
-
-## Conclusion:
-
-With the installation of pfSense on the HP T630 thin client and the additional Realtek NIC, a robust and efficient home network setup was achieved, providing reliable WAN and LAN connectivity.
+This build provides an excellent balance of cost, performance, and efficiency for home networking needs. The HP T630 with added RTL8125B NIC creates a capable pfSense router suitable for most home networking scenarios, all while maintaining a budget under $25.
